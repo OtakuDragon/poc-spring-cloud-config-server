@@ -1,0 +1,3 @@
+#propriedades definidas aqui são herdadas por todos os clientes do servidor de configuração
+proriedade:
+  global: all

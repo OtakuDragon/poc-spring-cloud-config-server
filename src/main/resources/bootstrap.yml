@@ -1,0 +1,34 @@
+#Propriedades que estão no bootstrap.yml não são baixadas por clientes
+server:
+  port: 8888
+
+
+#no git o configuration server pegar o application.yml no root do repositório e incluir
+#ás propriedades no file system, foi necessario colocar o application.yml em uma pasta
+#coloquei nome global mas poderia ser qualquer nome que fosse depois declarado em serch locations
+
+#Configuração por GIT(Recomendada)
+#spring:
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: https://gitlab.com/{repositorio}/{repositorio}.git
+#          search-paths: app1,app2 #lista de pastas com applcations.yml no repositório
+#          username: insira usuario gitlab
+#          password: insira senha gitlab
+
+
+#Configuração por File system(não recomendada) utilizado para a poc porque é contido apenas a este projeto
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+          native:
+             #Procurar no file system
+             #searchLocations: file://<chapter 3>/confsvr/src/main/resources/config/licensingservice,
+             #                 file://<chapter 3>confsvr/src/main/resources/config/organizationservice
+             #Procurar dentro do jar
+             searchLocations: classpath:/global/, classpath:/poc-spring-cloud-config-client/
